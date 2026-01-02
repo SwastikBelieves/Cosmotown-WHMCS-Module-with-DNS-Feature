@@ -1,61 +1,86 @@
-# Cosmotown WHMCS Domain Registrar Module (with DNS Management)
+# Cosmotown WHMCS Registrar Module (with DNS Management)
 
 [![WHMCS Compatible](https://img.shields.io/badge/WHMCS-8.x--9.x-blue.svg)](https://www.whmcs.com/)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-orange.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![PHP](https://img.shields.io/badge/PHP-7.4%20|%208.1%2B-777bb4.svg)]()
 
-Enhance your WHMCS platform with the **Cosmotown Domain Reseller Module**. This integration allows you to automate domain registration, transfers, and renewals while providing your customers with full DNS management directly from your client area.
+Automate your domain reselling business with this comprehensive **Cosmotown WHMCS Module**. This integration connects your WHMCS installation directly to the Cosmotown API, providing automated registration, transfers, renewals, and full DNS record management for your clients.
+
+## 📂 Project Structure
+
+For the module to function correctly, ensure the folder is named `cosmotown` and placed in your WHMCS `/modules/registrars/` directory.
+
+```text
+cosmotown/
+├── lib/                      # Core API logic classes
+│   ├── ApiClient.php         # API Connection handler
+│   ├── RegisterDomain.php    # Registration logic
+│   ├── TransferDomain.php    # Transfer logic
+│   ├── Sync.php              # Domain expiry/status sync
+│   └── ... (and other helper classes)
+├── constants.php             # Module constants
+├── cosmotown.php             # Main WHMCS integration file
+├── dnsmanagement.tpl         # Client Area DNS template
+├── hooks.php                 # WHMCS automation hooks
+└── logo.png                  # Admin area provider logo
+```
 
 ## 🚀 Key Features
 
-* **Automated Registration:** Instant domain registration upon payment.
-* **Domain Transfers:** Seamlessly handle incoming domain transfers with EPP code validation.
-* **DNS Management:** Full support for adding/editing A, AAAA, MX, CNAME, and TXT records.
-* **Nameserver Management:** Allow clients to update their custom nameservers.
-* **EPP/Auth Code Handling:** Clients can retrieve their transfer codes securely.
-* **Auto-Renewal Support:** Support for WHMCS domain renewal automation.
-* **Registrar Lock:** Enable/Disable domain theft protection (Client Area).
-* **Contact Information Management:** View and update WHOIS contact details.
+- **Automated Domain Lifecycle**  
+  Instant registration, renewals, and incoming transfers.
 
-## 🛠 Installation
+- **Complete DNS Management**  
+  Clients can add/edit A, AAAA, MX, CNAME, and TXT records via the `dnsmanagement.tpl` interface.
 
-1.  **Download:** Clone or download this repository.
-2.  **Upload:** Upload the `cosmotown` folder to your WHMCS directory:
-    ```text
-    /your_whmcs_root/modules/registrars/cosmotown/
-    ```
-3.  **Ensure File Structure:** Your directory should look like this:
-    ```text
-    registrars/
-    └── cosmotown/
-        ├── cosmotown.php
-        ├── logo.gif
-        └── (any additional helper files)
-    ```
+- **Security & Protection**  
+  Full support for Registrar Lock and ID Protection toggles.
 
-## ⚙️ Configuration
+- **EPP Retrieval**  
+  Automated Auth Code generation for domain transfers.
 
-1.  Log in to your **WHMCS Admin Area**.
-2.  Navigate to **System Settings > Domain Registrars** (or *Setup > Products/Services > Domain Registrars* in older versions).
-3.  Find **Cosmotown** in the list and click **Activate**.
-4.  Enter your **Cosmotown API Key** and **Account ID** (obtained from the Cosmotown Reseller Dashboard).
-5.  Check **DNS Management** and **IP Address** settings as per your preference.
-6.  Click **Save Changes**.
+- **Sync Task**  
+  Keeps your WHMCS database updated with real-time domain status and expiry dates via the WHMCS cron.
 
-## 💻 Requirements
+## 🛠 Installation & Setup
 
-* **WHMCS:** v8.0 or later.
-* **PHP:** v7.4 or v8.1+ (Recommended).
-* **Cosmotown Account:** A valid reseller account with API access enabled.
-* **CURL:** PHP CURL extension enabled on your server.
+### 1. Whitelist Your Server IP (CRITICAL)
+
+The Cosmotown API will reject all requests until your server IP is authorized.
+
+1. Log in to your Cosmotown Account.  
+2. Navigate to **My Account > Reseller API**.  
+3. Add your WHMCS server's **Public IP Address** to the authorized list and save changes.
+
+### 2. Upload Files
+
+Upload the `cosmotown` folder to your WHMCS installation directory:
+
+```
+path_to_whmcs/modules/registrars/cosmotown/
+```
+
+### 3. Module Activation
+
+1. In your WHMCS Admin Area, go to **System Settings > Domain Registrars**.  
+2. Locate **Cosmotown** in the list and click **Activate**.  
+3. Enter your API Key provided by Cosmotown.  
+4. Click **Save Changes**.
+
+## ⚙️ Requirements
+
+- **WHMCS:** Version 8.0 or higher  
+- **PHP:** Version 7.4 or 8.1+  
+- **Cosmotown Account:** Must have an active reseller status and API access enabled
 
 ## 📄 License
-This module is released under the **GNU General Public License v2.0**. You are free to modify and distribute it for your own business needs.
+
+This module is released under the **GNU General Public License v2.0**.
 
 ## 👨‍💻 Developer
-**Swastik Chakraborty**
-* **Website:** [swastik.dev](https://swastik.dev/)
-* **Email:** [hello@swastik.dev](mailto:hello@swastik.dev)
-* **GitHub:** [@SwastikBelieves](https://github.com/SwastikBelieves)
 
----
-*Disclaimer: This is a third-party module and is not officially affiliated with Cosmotown Inc. Please test in a staging environment before moving to production.*
+**Swastik Chakraborty**
+
+- GitHub: `@SwastikBelieves`  
+- Website: https://swastik.dev  
+- Inquiries: hello@swastik.dev
